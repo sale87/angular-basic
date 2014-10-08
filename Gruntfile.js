@@ -1,5 +1,9 @@
 module.exports = function (grunt) {
+    // load all grunt tasks
+    require('load-grunt-tasks')(grunt);
+
     grunt.initConfig({
+        distdir: 'dist',
         pkg: grunt.file.readJSON('package.json'),
         concat: {
             options: {
@@ -7,7 +11,14 @@ module.exports = function (grunt) {
             },
             dist: {
                 src: ['app/**/*.js'],
-                dest: 'dist/js/<%= pkg.name %>.js'
+                dest: '<%= distdir %>/js/<%= pkg.name %>.js'
+            },
+            index: {
+                src: ['app/index.html'],
+                dest: '<%= distdir %>/index.html',
+                options: {
+                    process: true
+                }
             }
         },
         uglify: {
@@ -16,19 +27,31 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    'dist/js/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+                    '<%= distdir %>/js/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+                }
+            },
+            bower: {
+                options: {
+                    mangle: true,
+                    compress: true
+                },
+                files: {
+                    'js/vendor.min.js': 'js/vendor.js'
                 }
             }
         },
         bower_concat: {
             all: {
-                dest: '/dist/js/vendor.js'
+                dest: '<%= distdir %>/js/vendor.js'
             }
-        }
+        },
+        clean: ['<%= distdir %>/*']
     });
 
-    // load all grunt tasks
-    require('load-grunt-tasks')(grunt);
+    grunt.registerTask('buildbower', [
+        'bower_concat',
+        'uglify:bower'
+    ]);
 
-    grunt.registerTask('default', ['concat', 'uglify']);
+    grunt.registerTask('default', ['concat', 'uglify', 'buildbower']);
 };
