@@ -53,5 +53,5 @@ module.exports = function (grunt) {
         'uglify:bower'
     ]);
 
-    grunt.registerTask('default', ['concat', 'uglify', 'buildbower']);
+    grunt.registerTask('default', ['clean', 'concat', 'uglify', 'buildbower']);
 };

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/<%= grunt.config.get('pkg.name') %>.css"/>
+    <script type="text/javascript" src="/static/angular.js"></script>
+    <script type="text/javascript" src="/static/bootstrap.js"></script>
+    <script type="text/javascript" src="/static/<%= grunt.config.get('pkg.name') %>.js"></script>
+</head>
+
+<body ng-controller="ApplicationControlle">
+    <div ng-view>
+        {{message}}
+    </div>
+</body>
+</html>
