@@ -36,7 +36,7 @@ module.exports = function (grunt) {
                     compress: true
                 },
                 files: {
-                    'js/vendor.min.js': 'js/vendor.js'
+                    '<%= distdir %>/js/vendor.min.js': '<%= distdir %>/js/vendor.js'
                 }
             }
         },
@@ -50,8 +50,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('buildbower', [
         'bower_concat',
-        'uglify:bower'
     ]);
 
-    grunt.registerTask('default', ['clean', 'concat', 'uglify', 'buildbower']);
+    grunt.registerTask('default', ['clean', 'concat', 'buildbower', 'uglify']);
 };

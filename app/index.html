@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
 <head>
-    <link rel="stylesheet" type="text/css" href="/static/<%= grunt.config.get('pkg.name') %>.css"/>
-    <script type="text/javascript" src="/static/angular.js"></script>
-    <script type="text/javascript" src="/static/bootstrap.js"></script>
-    <script type="text/javascript" src="/static/<%= grunt.config.get('pkg.name') %>.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/<%= grunt.config.get('pkg.name') %>.css"/>
+    <script type="text/javascript" src="/js/vendor.min.js"></script>
+    <script type="text/javascript" src="/js/<%= grunt.config.get('pkg.name') %>.min.js"></script>
 </head>
 
-<body ng-controller="ApplicationControlle">
+<body ng-controller="ApplicationController">
     <div ng-view>
         {{message}}
     </div>
