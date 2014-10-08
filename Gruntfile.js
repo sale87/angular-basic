@@ -45,12 +45,15 @@ module.exports = function (grunt) {
                 dest: '<%= distdir %>/js/vendor.js'
             }
         },
-        clean: ['<%= distdir %>/*']
+        clean: ['<%= distdir %>/*'],
+        cssmin: {
+            combine: {
+                files: {
+                    '<%= distdir %>/assets/css/style.css': ['app/assets/css/bootstrap.min.css', 'app/assets/css/style.css']
+                }
+            }
+        }
     });
 
-    grunt.registerTask('buildbower', [
-        'bower_concat',
-    ]);
-
-    grunt.registerTask('default', ['clean', 'concat', 'buildbower', 'uglify']);
+    grunt.registerTask('default', ['clean', 'concat', 'bower_concat', 'uglify', 'cssmin']);
 };
